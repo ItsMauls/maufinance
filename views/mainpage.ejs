@@ -1,0 +1,116 @@
+<%- include('./includes/header.ejs') %>
+<%- include('./includes/navbar.ejs') %>
+
+<div id="gallery" class="relative w-full mt-14" data-carousel="slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-56 overflow-hidden  rounded-lg md:h-96">
+         <!-- Item 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://e0.pxfuel.com/wallpapers/307/706/desktop-wallpaper-finance-finance-and-accounting.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+            <img src="https://pbs.twimg.com/media/Fvu4z_7akAAqhcS?format=jpg&name=medium" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+        </div>
+        <!-- Item 3 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://www.bosslawyers.com.au/wp-content/uploads/2014/05/4-News-Story1.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+        </div>
+        <!-- Item 4 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://www.kelloggccu.org/files/kellogg/1/image/Photos/Blog%20Photos/Untitled%20(7%20%C3%97%205%20in).jpg.webp" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+        </div>
+        <!-- Item 5 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://boombastis.sgp1.digitaloceanspaces.com/wp-content/uploads/2016/09/Memanfaatkan-bantuan-jin.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+        </div>
+    </div>
+    <!-- Slider controls -->
+    <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-14 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span class="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-14 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="sr-only">Next</span>
+        </span>
+    </button>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 text-center md:text-start mt-20 md:items-center">
+    <div class="mx-auto mb-10 md:mb-0">
+        <img class="rounded-lg max-w-full md:max-w-xl" src="https://img.freepik.com/free-vector/accountant-concept-illustration_114360-5938.jpg?w=1060&t=st=1692459677~exp=1692460277~hmac=de77b87259071483cbc0d90132a2576c45af15e73c4aa77bc9f81488f6331d2f" alt="">
+    </div>
+    <div class="my-8">
+        <h1 class="font-QuickSand text-blue-900 text-4xl md:text-6xl">Disini Kamu Bisa Mengatur Uangmu Dengan Happy</h1>
+        <p class="mt-4 md:mt-6 text-gray-600 text-lg font-Montserrat">
+            Kehidupan tanpa MauFinance seperti secangkir kopi tanpa kue. Kami tidak hanya menawarkan keuangan yang sehat,
+            tetapi juga memberi rasa manis pada setiap langkah keuanganmu.
+            Jadi, mari bergabung! Kita akan memastikan saldo tabunganmu tetap penuh, sambil tetap menyisakan ruang untuk secangkir kopi dan kue favoritmu!"
+        </p>
+    </div>
+</div>
+
+<div class="mx-auto max-w-screen-xl my-20">
+    <h1 class="text-blue-900 text-5xl mx-auto text-center font-QuickSand mb-14">Benefit Yang Kamu Dapatkan di Web Ini :</h1>
+    <div class="grid md:grid-cols-3 max-w-screen-xl gap-6 md:border-none">
+        <div class="bg-white md:shadow-md rounded-lg">
+            <img class="object-fill" src="https://www-assets.youneedabudget.com/wp-content/uploads/2021/12/13184301/illo_painpoints_debt_socialshare.jpg" alt="">
+            <h1 class="text-center font-bold md:text-2xl text-xl my-4">Lunas Hutang</h1>
+            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione voluptates architecto adipisci dignissimos consequuntur voluptate quod repudiandae soluta saepe magnam? Enim facere eum nesciunt necessitatibus. Porro voluptate eius eaque mollitia!</p>
+        <form action="">
+            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg py-3 my-4">Oke Doke</button>
+        </form>
+        </div>
+        <div class="bg-white md:shadow-md rounded-lg">
+            <img class="object-fill" src="https://www-assets.youneedabudget.com/wp-content/uploads/2021/12/13184301/illo_painpoints_debt_socialshare.jpg" alt="">
+            <h1 class="text-center font-bold md:text-2xl text-xl my-4">Lunas Hutang</h1>
+            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione voluptates architecto adipisci dignissimos consequuntur voluptate quod repudiandae soluta saepe magnam? Enim facere eum nesciunt necessitatibus. Porro voluptate eius eaque mollitia!</p>
+        <form action="">
+            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg py-3 my-4">Oke Doke</button>
+        </form>
+        </div>
+        <div class="bg-white md:shadow-md rounded-lg">
+            <img class="object-fill" src="https://www-assets.youneedabudget.com/wp-content/uploads/2021/12/13184301/illo_painpoints_debt_socialshare.jpg" alt="">
+            <h1 class="text-center font-bold md:text-2xl text-xl my-3">Lunas Hutang</h1>
+            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione voluptates architecto adipisci dignissimos consequuntur voluptate quod repudiandae soluta saepe magnam? Enim facere eum nesciunt necessitatibus. Porro voluptate eius eaque mollitia!</p>
+        <form action="">
+            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg  py-3 my-4">Oke Doke</button>
+        </form>
+        </div>        
+    </div>
+</div>
+
+<div class="bg-blue-100 md:px-8 md:py-12 py-0">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="text-center md:text-left order-2 md:order-1">
+            <h1 class="font-bold text-blue-900 text-center font-QuickSand md:text-6xl text-3xl md:my-3">Tunggu Apalagi?</h1>
+            <p class="mt-4 md:mt-6 py-3 text-gray-600 text-center text-sm md:text-lg font-Montserrat">
+                Jangan banyak melamun tentang masa depan keuanganmu.
+                Dengan MauFinance, kamu bisa mengambil kendali atas uangmu sekarang dan merencanakan hari esok dengan percaya diri.
+                Mulailah hari ini untuk sebuah perjalanan keuangan yang lebih baik.
+            </p>
+            <form method="get" action="/signup">
+                <button type="submit" class="hover:bg-orange-400 hover:scale-95 block mx-auto bg-orange-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 border-orange-900 shadow-xl  py-3 my-4">Join Sekarang</button>
+            </form>   
+        </div>
+        <div class="flex items-center justify-center order-1 md:order-2">
+            <img class="max-w-sm md:max-w-lg shadow-sm" src="https://img.freepik.com/free-vector/organic-flat-join-us-concept_23-2148948357.jpg?w=1060&t=st=1692462137~exp=1692462737~hmac=66c7c29b07721980d3944c7c0e9bba8a8a569292068d6061861c3bafc2f2e71c" alt="">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+   
+<%- include('./includes/footer.ejs') %>
