@@ -10,9 +10,7 @@ const dashboardSchema = new Schema({
   user : {
     type : Schema.Types.ObjectId,
     ref : 'User'
-  }
-
-    
+  }    
 }, {timestamps : true})
 
 const Dashboard = mongoose.model('dashboard', dashboardSchema)

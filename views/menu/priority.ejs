@@ -1,0 +1,77 @@
+<%- include('../includes/header.ejs') %>
+<%- include('../includes/navbar.ejs') %>
+
+<div class="flex items-center justify-center md:max-w-full md:max-h-[400px] max-h-[800px] mx-auto mt-14 bg-blue-200">
+    <div class="grid md:grid-cols-2 md:max-w-5xl max-w-7xl gap-14">
+        <div class="md:mt-24 pt-32 pb-4 md:order-1 order-2">
+            <h1 class=" font-Montserrat text-4xl text-center md:text-start text-sky-900 font-bold">Kelola Uangmu Sekarang!</h1>
+            <p class="text-lg mt-2 text-center md:text-start">
+                 Dapatkan kendali penuh atas pengeluaran Anda dengan membedakan antara kebutuhan dan keinginan,
+                  serta tetapkan anggaran yang jelas untuk prioritas utama Anda. Dengan fitur pelacakan transaksi harian yang mudah digunakan,
+                   Anda dapat dengan cepat melihat perkembangan finansial Anda. </p>
+        </div>
+        <div class="md:order-2 order-1 max-h-[200px] md:max-h-[500px]">
+            <img src="/image/Collaboration.png" alt="">
+        </div>
+    </div>
+
+</div>
+
+<div class="mt-14 max-w-5xl mx-auto mb-20">
+    <h1 class="bg-blue-500 pl-2 font-Montserrat text-white font-semibold flex justify-between text-center text-4xl mx-4 border-b-2 border-blue-900">
+        KEBUTUHAN <span class="bg-red-400 border-b-2 border-r-2 shadow-xl border-black"><a href="/prioritas/keinginan" class="hidden md:block">KEINGINAN</a></span>
+    </h1>
+    <div class="bg-blue-200 my-2 mx-4 border-b-2 border-r-4 drop-shadow-xl border-black shadow-xl">
+        <ul class="text-2xl mx-2 py-4">
+            <div class="grid grid-cols-5 text-2xl text-cyan-600 font-bold font-QuickSand border-b-4 pb-2 border-blue-600">
+                <div class="w-min-content text-lg md:text-2xl">qty</div>
+                <div class="text-center text-lg col-span-2 md:text-2xl">Kebutuhan Saat Ini</div>
+                <div class="text-center text-lg md:text-2xl">Harga</div>
+             </div>
+        
+                <% for(let prio of priority) { %>
+                    <li class="grid mx-auto grid-cols-5  text-lg md:text-xl border-b-2 border-blue-300 my-2 items-center pb-2">
+                        <span class="py-1 w-min text-center">x<%=prio.needs[0].qty%></span>
+                        <span class="py-1 flex col-span-2  justify-center"><%=prio.needs[0].items%></span> 
+                        <span class="py-1 text-center">Rp. <%= prio.needs[0].qty * prio.needs[0].price%> </span>
+                        <form method="post" action="/prioritas/<%=prio._id%>?_method=DELETE" enctype="application/x-www-form-urlencoded" class="flex justify-center">
+                            <input type="hidden" name="_method" value="DELETE"> 
+                            <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md ml-2">X</button>
+                        </form>
+                    </li>
+                    
+                
+                <% } %>
+            
+
+            <li class="justify-between items-center gap-x-4 md:flex">
+                <form action="/prioritas" method="POST" class="flex items-center mx-auto">
+                    <input value="1" type="number" class="md:w-2/12 w-10 bg-transparent bg-yellow-50 border-r-2 border-white border-r-yellow-200 rounded-l-lg" placeholder="qty" name="qty">
+                    <input type="text" class="md:w-3/4 w-1/2 bg-transparent bg-yellow-50 border-r-2 border-white border-r-yellow-200" placeholder="Kebutuhanmu Apa" name="items">
+                    <input type="number" class=" md:w-fit w-20 bg-transparent bg-yellow-50 border-r-2 border-white rounded-r-lg" placeholder="Harga" name="price">
+                    <button class="ml-1 bg-blue-500 rounded-full px-4 border-black-900 border py-2 text-lg md:text-2xl text-white font-bold">></button>
+                </form>
+            </li>
+        </ul>
+        <div class="bg-blue-400 text-xl px-4 grid grid-rows-2 text-center md:text-start md:grid-cols-2 py-2 gap-4">
+            <div class="bg-green-100 border-black border-b-2 font-semibold font-Montserrat px-4 py-2 sm:py-4">
+                Current Balance <%= userData[userData.length - 1].currentBalance %>
+            </div>
+            <div class="bg-red-100 border-black border-b-2 font-semibold font-Montserrat px-4 py-2 sm:py-4">
+                Total Harga Kebutuhan <%= totalHarga %>
+            </div>
+            <div class="bg-cyan-500 col-span-2 md:col-span-2 md:text-xl font-semibold font-Montserrat text-4xl px-4 py-2 sm:py-4">
+                Estimasi Saldo  <%= userData[userData.length - 1].currentBalance - totalHarga %>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+</div>
+
+
+
+
+<%- include('../includes/footer.ejs') %>
+

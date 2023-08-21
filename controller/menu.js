@@ -6,11 +6,17 @@ exports.getDashboard = async (req,res) => {
 
         if(req.session.user) {
            const user = await User.findById(req.session.user._id)
+           const dbData = user.dashboard
+           .map(db => {
+            return db.dashboardData
+           })
+           console.log(dbData[dbData.length -1].currentBalance.length)
            res.render('./menu/dashboard', {
                pageTitle : 'Dashboard',
                path : '/dashboard',
                currentUser : user.username,
-               user
+               user,
+               dbData
            })
        }
        res.render('./menu/dashboard', {
@@ -27,14 +33,7 @@ exports.getManage = async(req,res) => {
     try {
         if(req.session.user) {
             const user = await User.findById(req.session.user._id)
-            .populate('dashboard')
-            const dashboards = user.dashboard; // Array of populated dashboard documents
-            dashboards.forEach(d => {
-                const balance = d.debt; // Access balance field
-                console.log(balance)
-                // ... do something with balance
-            });
-            
+           console.log(user.dashboard)
             res.render('./menu/manage', {
                 path : './manage',
                 pageTitle : 'Manage My Money',
@@ -69,9 +68,17 @@ exports.postBalance = async (req,res) => {
             date
         })
         await insertBalance.save()
-        user.dashboard.push(insertBalance)
+        user.dashboard.push({
+            dashboardID: insertBalance._id,
+            dashboardData: {
+                currentBalance: balance,
+                expense,
+                debt,
+                date
+            }
+        });
         await user.save()
-        res.redirect('/manage')
+        res.redirect('/dashboard')
     }
     catch(err) {
         console.log(err)

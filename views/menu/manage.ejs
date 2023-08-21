@@ -12,11 +12,11 @@
                 <form action="/manage/<%=user._id%>" method="POST" novalidate>
                     <input name="date" class="block w-full md:w-1/2 mx-auto rounded-lg bg-orange-200 text-white font-Montserrat font-bold" type="date">
                     <label class="text-white md:ml-4">Saldo Saya Sekarang</label>
-                    <input name="balance" class="border-b-2 border-black block w-full md:w-5/6 ml-0 md:ml-4 rounded-lg" type="number">
+                    <input name="balance" class="border-b-2 border-black block w-full md:w-5/6 ml-0 md:ml-4 rounded-lg" type="number" min="0" placeholder="0" step="0.01">
                     <label class="text-white md:ml-4">Pengeluaran Saya Sekarang</label>
-                    <input name="expense" class="border-b-2 border-black block w-full md:w-5/6 ml-0 md:ml-4 rounded-lg" type="number">
+                    <input name="expense" class="border-b-2 border-black block w-full md:w-5/6 ml-0 md:ml-4 rounded-lg" type="number"  min="0" placeholder="0" step="0.01">
                     <label class="text-white md:ml-4">Hutang Saya Sekarang</label>
-                    <input name="debt" class="border-b-2 border-black block w-full md:w-5/6 ml-0 md:ml-4 rounded-lg" type="number">
+                    <input name="debt" class="border-b-2 border-black block w-full md:w-5/6 ml-0 md:ml-4 rounded-lg" type="number"  min="0" placeholder="0" step=".01">
                     <button class="bg-blue-600 block md:ml-4 px-5 py-2 mt-4 md:mt-0 rounded-lg">Enter</button>
                 </form>
             </div>
