@@ -99,8 +99,7 @@ exports.updateBalance = async (req,res,next) => {
     const user = await User.findById(req.session.user._id)
     const rawDate = user.updatedAt.toISOString()
     const formatDate = format(new Date(rawDate), 'd-MM-yy, HH:mm', {weekday : 'long'})
-    const userBalance = user.dashboard[0].dashboardData
-    const userId = user.dashboard[0].dashboardID
+    const userDashboard = user.dashboard[0]
     const dashboardId = req.params.dashID
     const {
         balance,
@@ -114,8 +113,8 @@ exports.updateBalance = async (req,res,next) => {
       expense
         },
         {new : true})
-    userBalance.currentBalance = updatedUserBalance.currentBalance
-    userBalance.debt = updatedUserBalance.debt
+    userDashboard.dashboardData.currentBalance = updatedUserBalance.currentBalance
+    userDashboard.dashboardData.debt = updatedUserBalance.debt
         user.dashboard[0] = {
             dashboardID : dashboardId,
             dashboardData: {
@@ -135,8 +134,7 @@ exports.updateBalance = async (req,res,next) => {
         user,
         formatDate,
         updatedDashboard : updatedDashb,
-        userBalance,
-        userId
+        userDashboard
     })
     
     }

@@ -75,16 +75,16 @@ exports.deletePriority = async (req, res, next) => {
         const needID = req.params.needId;
         const needs = await Needs.find({user : req.session.user._id})
         const user = await User.findById(req.session.user._id)
-        const userData = user.dashboard.map(u => {
-            return u.dashboardData
-        })
+
+        const userDashboard = user.dashboard[0]
         const totalHarga = needs.reduce((total, needs) => total + needs.price, 0)
 
         if (!needs) {
            return next(new Error('Tidak Ada Priority!'))
         }
         await Needs.findByIdAndDelete(needID)
-        needs.pop(needs.user)
+        const updatedNeed = needs.filter(need => need._id.toString() !== needID)
+
         res.status(201)
         .render('./menu/priority', 
         {
@@ -92,9 +92,9 @@ exports.deletePriority = async (req, res, next) => {
             pageTitle : 'Prioritas Saya',
             currentUser : user.username,
             user,
-            needs,
-            userData,
-            totalHarga
+            needs : updatedNeed,
+            totalHarga,
+            userDashboard
         })
          console.log(`#${prio} Terhapus!`)
         
@@ -112,9 +112,7 @@ exports.getWishlist = async (req,res) => {
     try {
         const wants = await Wants.find({user : req.session.user._id})
         const user = await User.findById(req.session.user._id)
-        const userData = user.dashboard.map(u => {
-            return u.dashboardData
-        })
+        const userDashboard = user.dashboard[0]
         const totalHarga = wants.reduce((total, wants) => total + wants.price, 0)
         if(req.session.user) {
         res.render('./menu/Wishlist', {
@@ -123,7 +121,7 @@ exports.getWishlist = async (req,res) => {
             currentUser : user.username,
             user,
             wants,
-            userData,
+           userDashboard,
             totalHarga
         })
         if(!req.session.user) {
@@ -176,19 +174,19 @@ exports.postWishlist = async (req,res) => {
 
 exports.deleteWishlist = async (req, res, next) => {
     try {
-        const needID = req.params.needId;
+        const wantID = req.params.wantId;
         const wants = await Wants.find({user : req.session.user._id})
         const user = await User.findById(req.session.user._id)
-        const userData = user.dashboard.map(u => {
-            return u.dashboardData
-        })
+        const userDashboard = user.dashboard[0]
         const totalHarga = wants.reduce((total, wants) => total + wants.price, 0)
 
         if (!wants) {
            return next(new Error('Tidak Ada Wishlist!'))
         }
-        await wants.findByIdAndDelete(needID)
-        wants.pop(wants.user)
+        await Wants.findByIdAndDelete(wantID)
+      
+        const updatedW = wants.filter(want => want._id.toString() !== wantID)
+        
         res.status(201)
         .render('./menu/Wishlist', 
         {
@@ -196,13 +194,11 @@ exports.deleteWishlist = async (req, res, next) => {
             pageTitle : 'Prioritas Saya',
             currentUser : user.username,
             user,
-            wants,
-            userData,
+            wants : updatedW,
+            userDashboard,
             totalHarga
         })
          console.log(`#${prio} Terhapus!`)
-        
-        return res.redirect('/prioritas');
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
