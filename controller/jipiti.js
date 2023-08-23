@@ -20,6 +20,9 @@ exports.chatWithGPT = async (req, res, next) => {
             assistant : []
         });
     }
+    if(!req.session.user) {
+        res.redirect('/')
+    }
 };  
 
 exports.postGpt = async(req,res) => {

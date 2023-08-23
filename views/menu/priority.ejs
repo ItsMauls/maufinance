@@ -44,11 +44,11 @@
 
 </div>
 
-<div class="mt-14 max-w-5xl mx-auto mb-20">
-    <h1 class="bg-blue-500 pl-2 font-Montserrat text-white font-semibold flex justify-between text-center text-4xl mx-4 border-b-2 border-blue-900">
-        KEBUTUHAN <span class="bg-red-400 border-b-2 border-r-2 shadow-xl border-black"><a href="/prioritas/wishlist" class="hidden md:block">KEINGINAN</a></span>
+<div class="mt-14 max-w-5xl mx-auto mb-20  ">
+    <h1 class="bg-blue-500 pl-2 rounded-t-sm font-Montserrat text-white font-semibold flex justify-between text-center text-4xl mx-4 border-b-2 border-blue-900">
+        KEBUTUHAN <span class="bg-red-400 border-b-2 border-r-2 shadow-xl border-black"><a href="/prioritas/wishlist" class="hidden md:block ">KEINGINAN</a></span>
     </h1>
-    <div class="bg-blue-200 my-2 mx-4 border-b-2 border-r-4 drop-shadow-xl border-black shadow-xl">
+    <div class="bg-blue-200 my-2 mx-4 border-b-2 border-r-4 drop-shadow-xl border-black shadow-xl rounded-t-lg">
         <ul class="text-2xl mx-2 py-4">
             <div class="grid grid-cols-5 text-2xl text-cyan-600 font-bold font-QuickSand border-b-4 pb-2 border-blue-600">
                 <div class="w-min-content text-lg md:text-2xl">qty</div>
@@ -71,7 +71,7 @@
                 <% } %>
 
 
-            <li class="justify-between items-center gap-x-4 md:flex">
+            <li class="justify-between items-center gap-x-4 md:flex my-4">
                 <form action="/prioritas" method="POST" class="flex items-center mx-auto">
                     <input value="1" type="number" class="md:w-2/12 w-10 bg-transparent bg-yellow-50 border-r-2 border-white border-r-yellow-200 rounded-l-lg" placeholder="qty" name="qty">
                     <input type="text" class="md:w-3/4 w-1/2 bg-transparent bg-yellow-50 border-r-2 border-white border-r-yellow-200" placeholder="Kebutuhanmu Apa" name="items">
@@ -82,11 +82,11 @@
         </ul>
 
         <div class="bg-blue-400 text-xl px-4 grid grid-rows-2 text-center md:text-start md:grid-cols-2 py-2 gap-4">
-            <div class="bg-green-100 border-black border-b-2 font-semibold font-Montserrat px-4 py-2 sm:py-4">
+            <div class="bg-green-100 dark:bg-green-500 border-black border-b-2 font-semibold font-Montserrat px-4 py-2 sm:py-4">
                 Current Balance <%= userDashboard.dashboardData.currentBalance %>
             </div>
           
-            <div class="bg-red-100 border-black border-b-2 font-semibold font-Montserrat px-4 py-2 sm:py-4">
+            <div class="bg-red-100 dark:bg-red-500 border-black border-b-2 font-semibold font-Montserrat px-4 py-2 sm:py-4">
                 Total Harga Kebutuhan <%= totalHarga %>
             </div>
             <div class="bg-cyan-500 col-span-2 md:col-span-2 md:text-xl font-semibold font-Montserrat text-4xl px-4 py-2 sm:py-4">

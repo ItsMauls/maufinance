@@ -6,14 +6,13 @@ const { validationResult } = require('express-validator')
 
 
 exports.getPriority = async (req,res) => {
-    try {
-        const needs = await Needs.find({user : req.session.user._id})
-        const user = await User.findById(req.session.user._id)
-        
+    try { 
         if(req.session.user) {
+            const needs = await Needs.find({user : req.session.user._id})
+            const user = await User.findById(req.session.user._id)
             const userDashboard = user.dashboard[0]
             const totalHarga = needs.reduce((total, needs) => total + needs.price, 0)
-        res.render('./menu/priority', {
+         res.render('./menu/priority', {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya',
             currentUser : user.username,
@@ -25,11 +24,14 @@ exports.getPriority = async (req,res) => {
             errorMessage : ''
         })
         }
-
+        if(!req.session.user) {
+            res.redirect('/')
+        }
         res.render('./menu/priority', {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya'
         })
+        
     }
     catch(err) {
         if(!err.statusCode) {   
@@ -124,7 +126,9 @@ exports.getWishlist = async (req,res) => {
             userData,
             totalHarga
         })
-
+        if(!req.session.user) {
+            res.redirect('/')
+        }
         }
         res.render('./menu/Wishlist', {
             path : '/prioritas',

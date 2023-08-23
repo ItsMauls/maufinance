@@ -9,7 +9,8 @@ exports.getMainPage = async (req,res,next) => {
             path : '/',
             pageTitle : 'mauFinance',
             currentUser : user.username,
-            user
+            user,
+            isAuth : req.session.user
         })
     }
     res.render('mainpage', {

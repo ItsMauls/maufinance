@@ -7,14 +7,13 @@ const { validationResult } = require('express-validator')
 
 exports.getDashboard = async (req,res) => {
     try {
-       
+        
         if(req.session.user) {
-           const user = await User.findById(req.session.user._id)
+            const user = await User.findById(req.session.user._id)
+            const userDashboard = user.dashboard[0]
            const rawDate = user.updatedAt.toISOString()
            const formatDate = format(new Date(rawDate), 'd-MM-yy, HH:mm', {weekday : 'long'})
-           const userDashboard = user.dashboard[0]
         
-
            res.render('./menu/dashboard', {
                pageTitle : 'Dashboard',
                path : '/dashboard',
@@ -25,9 +24,13 @@ exports.getDashboard = async (req,res) => {
                 userDashboard
            })
        }
+       if(!req.session.user) {
+        res.redirect('/')
+       }
        res.render('./menu/dashboard', {
            pageTitle : 'Dashboard',
-           path : '/dashboard'
+           path : '/dashboard',
+           isAuth : req.session.user
        })
    }
    catch (err) {
