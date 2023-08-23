@@ -4,7 +4,8 @@ const { validationResult } = require('express-validator')
 
 exports.getSignUp = (req,res) => {
     try
-    {res.status(422)
+    {
+    res.status(422)
     .render('./auth/signup', {
         path : '/signup',
         pageTitle : 'Sign Up Page',
@@ -35,7 +36,6 @@ exports.postSignUp = async(req,res,next) => {
 
 try {
     if(!errors.isEmpty()) {
-        
         return res.status(422)
         .render('./auth/signup', {
             path : '/signup',

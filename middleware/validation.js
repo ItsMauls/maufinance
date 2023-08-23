@@ -71,3 +71,13 @@ body('password')
         next()
     }
 ]
+
+exports.balance = [
+    body('balance')
+    .trim()
+    .notEmpty().withMessage('Saldo Wajib Diisi!'),
+
+    (req,res,next) => {
+        next()
+    }
+]

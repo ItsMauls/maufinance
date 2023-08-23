@@ -4,39 +4,34 @@
 <div id="container" class="mx-auto mt-14">
 
     <h1 class="text-blue-900 text-2xl md:text-4xl font-semibold font-Montserrat my-3 mx-5">Halo, <%= user.username %> <span class="text-3xl">:)</span></h1>
-    <div class="grid grid-cols-1 md:grid-cols-3 w-full md:w-1/2 mx-auto my-14 text-blue-600 text-center rounded-xl py-3 font-bold font-Montserrat bg-purple-200 md:text-xl">
-        <div class="md:border-r-2 border-purple-300">
-            <button class="w-full md:w-auto">
-                14 Hari
-            </button>
-        </div>
-        <div class="md:border-r-2 border-purple-300">
-            <button class="w-full md:w-auto">
-                30 Hari
-            </button>
-        </div>
-        <div class="md:border-r-2 md:border-b-0 border-purple-300">
-            <button class="w-full md:w-auto">
-                90 Hari
-            </button>
-        </div>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 mx-auto md:mx-16 text-center gap-4 md:h-[220px]">
-        <div class="bg-blue-300 text-white font-Montserrat py-8 px-4 md:py-12">
+
+    <div class="grid grid-cols-1 md:w-auto w-2/3  md:grid-cols-2 mx-auto md:mx-16 text-center gap-4 md:h-[220px]">
+        <div class="bg-blue-300 md:rounded-none rounded-lg shadow-lg text-white font-Montserrat py-8 px-4 md:py-12">
             <h1 class="text-4xl md:text-6xl">Saldo</h1>
-            <h2 class="<%= (dbData[dbData.length-1].currentBalance.length > 8 ? 'text-7xl md:text-4xl' : 'text-7xl')   %>"><%= dbData[dbData.length -1].currentBalance %></h2>
-            <h3 class="md:text-lg">updated on <%= dbData[dbData.length -1].date %></h3>
+            <% if(userDashboard) { %>
+            <form action="/dashboard/<%=userDashboard.dashboardID%>?_method=PUT" method="post">
+            <input class="bg-transparent text-center w-5/6 outline-none <%= (userDashboard.dashboardData.currentBalance.length > 8 ? 'text-7xl md:text-4xl' : 'text-7xl') %>" name="balance" value="<%= userBalance.currentBalance %>"></input>
+            <h3 class="md:text-lg">updated on <%= formatDate %></h3>
+            <button class="text-4xl font-bold uppercase">update</button>
+            </form>
+            <% }%> 
+            <h1 class="text-center text-7xl w-5/6 mx-auto mb-2">0</h1>
+            <a href="/prioritas" class=" px-4 py-2 bg-sky-600 active:scale-95 rounded-lg hover:bg-blue-500"> INPUT SALDO </a>
         </div>
-        <div class="bg-pink-300 text-white font-Montserrat py-8 px-4 md:py-12">
-            <h1 class="text-4xl md:text-6xl">Pengeluaran</h1>
-            <h2 class="text-7xl md:text-9xl text-red-400">-<%= dbData[dbData.length -1].expense %></h2>
-            <h3 class="md:text-lg">updated on <%= dbData[dbData.length -1].date %></h3>
-        </div>
-        <div class="bg-green-300 text-white font-Montserrat py-8 px-4 md:py-12">
+  
+        <div class="bg-green-300 text-white md:rounded-none rounded-lg shadow-lg font-Montserrat py-8 px-4 md:py-12">
             <h1 class="text-4xl md:text-6xl">Hutang</h1>
-            <h2 class="text-7xl md:text-9xl text-red-400"><%= dbData[dbData.length -1].debt %></h2>
-            <h3 class="md:text-lg">updated on <%= dbData[dbData.length -1].date %></h3>
+            <% if(userDashboard) { %>
+            <form action="/dashboard/<%=userDashboard.dashboardID%>?_method=PUT" method="post">
+            <input class="bg-transparent text-center w-5/6 outline-none <%= (userDashboard.dashboardData.debt.length > 8 ? 'text-7xl md:text-4xl' : 'text-7xl') %>" name="debt" value="<%= userBalance.debt %>"></input>
+           
+            <h3 class="md:text-lg">updated on <%= formatDate %></h3>
+            <button class="text-4xl font-bold uppercase">update</button>
+            </form>
+            <% }%>
+            <h1 class="text-center text-7xl w-5/6 mx-auto mb-2">0</h1>
+            <a href="/prioritas" class="px-4 py-2 bg-sky-600 rounded-lg active:scale-90 hover:bg-blue-500 "> INPUT SALDO </a>
         </div>
     </div>
 </div>

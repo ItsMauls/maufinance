@@ -62,27 +62,27 @@
     <h1 class="text-blue-900 text-5xl mx-auto text-center font-QuickSand mb-14">Benefit Yang Kamu Dapatkan di Web Ini :</h1>
     <div class="grid md:grid-cols-3 max-w-screen-xl gap-6 md:border-none">
         <div class="bg-white md:shadow-md rounded-lg">
-            <img class="object-fill" src="https://www-assets.youneedabudget.com/wp-content/uploads/2021/12/13184301/illo_painpoints_debt_socialshare.jpg" alt="">
-            <h1 class="text-center font-bold md:text-2xl text-xl my-4">Lunas Hutang</h1>
-            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione voluptates architecto adipisci dignissimos consequuntur voluptate quod repudiandae soluta saepe magnam? Enim facere eum nesciunt necessitatibus. Porro voluptate eius eaque mollitia!</p>
-        <form action="">
-            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg py-3 my-4">Oke Doke</button>
+            <img class="object-fill" src="/image/chatbot.png" alt="">
+            <h1 class="text-center font-bold md:text-2xl text-xl my-4">Konsultasi dengan AI</h1>
+            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Dapatkan panduan finansial terbaik melalui konsultasi interaktif dengan AI canggih bernama Firda, siap membantu pertanyaanmu.</p>
+        <form action="<%= isAuth ? '/konsultasi' : '/signup' %>">
+            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg py-3 my-4"><%= isAuth ? 'Konsultasi' : 'Sign Up' %></button>
         </form>
         </div>
         <div class="bg-white md:shadow-md rounded-lg">
-            <img class="object-fill" src="https://www-assets.youneedabudget.com/wp-content/uploads/2021/12/13184301/illo_painpoints_debt_socialshare.jpg" alt="">
-            <h1 class="text-center font-bold md:text-2xl text-xl my-4">Lunas Hutang</h1>
-            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione voluptates architecto adipisci dignissimos consequuntur voluptate quod repudiandae soluta saepe magnam? Enim facere eum nesciunt necessitatibus. Porro voluptate eius eaque mollitia!</p>
-        <form action="">
-            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg py-3 my-4">Oke Doke</button>
+            <img class="object-fill" src="/image/telesales.png" alt="">
+            <h1 class="text-center font-bold md:text-2xl text-xl my-4">Kelola Uang Dengan Mudah</h1>
+            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Ciptakan masa depan finansial yang lebih cerah dengan kemudahan dalam mengatur dan mengelola uangmu melalui platform kami.</p>
+        <form action="<%= isAuth ? '/prioritas' : '/signup' %>">
+            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg py-3 my-4"><%= isAuth ? 'Prioritas' : 'Sign Up' %></button>
         </form>
         </div>
         <div class="bg-white md:shadow-md rounded-lg">
-            <img class="object-fill" src="https://www-assets.youneedabudget.com/wp-content/uploads/2021/12/13184301/illo_painpoints_debt_socialshare.jpg" alt="">
-            <h1 class="text-center font-bold md:text-2xl text-xl my-3">Lunas Hutang</h1>
-            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione voluptates architecto adipisci dignissimos consequuntur voluptate quod repudiandae soluta saepe magnam? Enim facere eum nesciunt necessitatibus. Porro voluptate eius eaque mollitia!</p>
-        <form action="">
-            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg  py-3 my-4">Oke Doke</button>
+            <img class="object-fill" src="/image/corporate.png" alt="">
+            <h1 class="text-center font-bold md:text-2xl text-xl my-3">Mempermudah Hidup</h1>
+            <p class="text-center p-2 md:px-8 text-gray-600 text-sm md:text-lg font-Montserrat">Raih hidup lebih mudah dan bebas stres dengan solusi inovatif yang membuat tugas-tugas keuangan menjadi lebih sederhana dan efisien.</p>
+        <form action="<%= isAuth ? '/prioritas' : '/signup' %>">
+            <button class="block mx-auto bg-blue-500 rounded-lg px-16 text-white text-lg font-Montserrat font-bold border-b-4 hover:bg-blue-400 border-blue-800 shadow-lg  py-3 my-4"><%= isAuth ? 'Prioritas' : 'Sign Up' %></button>
         </form>
         </div>        
     </div>
@@ -102,7 +102,7 @@
             </form>   
         </div>
         <div class="flex items-center justify-center order-1 md:order-2">
-            <img class="max-w-sm md:max-w-lg shadow-sm" src="https://img.freepik.com/free-vector/organic-flat-join-us-concept_23-2148948357.jpg?w=1060&t=st=1692462137~exp=1692462737~hmac=66c7c29b07721980d3944c7c0e9bba8a8a569292068d6061861c3bafc2f2e71c" alt="">
+            <img class="max-w-sm md:max-w-lg shadow-sm" src="/image/juara.png" alt="">
         </div>
     </div>
 </div>

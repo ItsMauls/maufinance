@@ -1,40 +1,31 @@
-const Priority = require('../models/priority')
+
 const User = require('../models/user')
+const Needs = require('../models/needs')
+const Wants = require('../models/wants')
+const { validationResult } = require('express-validator')
+
 
 exports.getPriority = async (req,res) => {
     try {
-        const date = new Date();
-
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        let currentDate = `${day}-${month}-${year}`
-        const priority = await Priority.find({user : req.session.user._id})
+        const needs = await Needs.find({user : req.session.user._id})
         const user = await User.findById(req.session.user._id)
-        const totalHarga = priority.reduce((total, prio) => total + prio.needs[0].price, 0)
-        const prioData = [...priority.map(prio => {
-            return prio.needs[0]._id
-        })]
-        // const totalHargaWants = priority.reduce((total, prio) => total + prio.wants[0].price, 0)
-        const userData = user.dashboard.map(u => {
-            return u.dashboardData
-        })
         
         if(req.session.user) {
+            const userDashboard = user.dashboard[0]
+            const totalHarga = needs.reduce((total, needs) => total + needs.price, 0)
         res.render('./menu/priority', {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya',
-            currentUser : user.name,
+            currentUser : user.username,
             user,
-            priority,
-            prioData,
+            needs,
+            userDashboard,
             totalHarga,
-            userData,
-            currentDate
-           
+            validationError : [],
+            errorMessage : ''
         })
-
         }
+
         res.render('./menu/priority', {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya'
@@ -43,13 +34,13 @@ exports.getPriority = async (req,res) => {
     catch(err) {
         if(!err.statusCode) {   
           return res.status(500)
-          .json ({message : err})
+          .json ({message : err.message})
         }
     }
 }
 
 exports.postPriority = async (req,res) => {
-    try {
+    try {   
         const user = await User.findById(req.session.user._id)
         const {
             qty,
@@ -57,19 +48,16 @@ exports.postPriority = async (req,res) => {
             price
         } = req.body
 
-        const postNeeds = new Priority ({
-          needs : {
+        const postNeeds = new Needs ({
             qty,
             items,
-            price
-          },
-          user : user._id
-        }) 
+            price, 
+            user : user._id })
+          
         if(postNeeds) {
             await postNeeds.save()
         }
-       
-        res.redirect('/prioritas')
+       res.redirect('/prioritas')
     }
     catch(err) {
         if(!err.statusCode) {
@@ -79,54 +67,136 @@ exports.postPriority = async (req,res) => {
     }
 }
 
-exports.postWants = async (req,res,next) => {
-    try {
-        const user = await User.findById(req.session.user._id)
-        const {
-            qty_wants,
-            items_wants,
-            price_wants
-        } = req.body
-
-        const postWants = new Priority ({
-          wants : {
-            qty : qty_wants,
-            items : items_wants,
-            price : price_wants
-          },
-          user : user._id
-        })
-        await postWants.save()
-        res.redirect('/prioritas')
-    }
-    catch(err) {
-        if(!err.statusCode) {
-          return res.status(500)
-          .json({message : err})
-        }
-    }
-}
 
 exports.deletePriority = async (req, res, next) => {
     try {
-        const prioID = req.params.prioId;
-        const prio = await Priority.findById(prioID);
-        const priority = await Priority.find({user : req.session.user._id})
+        const needID = req.params.needId;
+        const needs = await Needs.find({user : req.session.user._id})
         const user = await User.findById(req.session.user._id)
-        
-        if (!prio) {
+        const userData = user.dashboard.map(u => {
+            return u.dashboardData
+        })
+        const totalHarga = needs.reduce((total, needs) => total + needs.price, 0)
+
+        if (!needs) {
            return next(new Error('Tidak Ada Priority!'))
         }
-        await Priority.findByIdAndDelete(prioID)
-        res.status(200)
+        await Needs.findByIdAndDelete(needID)
+        needs.pop(needs.user)
+        res.status(201)
         .render('./menu/priority', 
         {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya',
-            currentUser : user.name,
+            currentUser : user.username,
             user,
-            priority})
-        console.log(`#${prio} Terhapus!`)
+            needs,
+            userData,
+            totalHarga
+        })
+         console.log(`#${prio} Terhapus!`)
+        
+        return res.redirect('/prioritas');
+    } catch (err) {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+};
+
+
+exports.getWishlist = async (req,res) => {
+    try {
+        const wants = await Wants.find({user : req.session.user._id})
+        const user = await User.findById(req.session.user._id)
+        const userData = user.dashboard.map(u => {
+            return u.dashboardData
+        })
+        const totalHarga = wants.reduce((total, wants) => total + wants.price, 0)
+        if(req.session.user) {
+        res.render('./menu/Wishlist', {
+            path : '/prioritas',
+            pageTitle : 'Prioritas Saya',
+            currentUser : user.username,
+            user,
+            wants,
+            userData,
+            totalHarga
+        })
+
+        }
+        res.render('./menu/Wishlist', {
+            path : '/prioritas',
+            pageTitle : 'Prioritas Saya'
+        })
+    }
+    catch(err) {
+        if(!err.statusCode) {   
+          return res.status(500)
+          .json ({message : err.message})
+        }
+    }
+}
+
+exports.postWishlist = async (req,res) => {
+    try {
+        const user = await User.findById(req.session.user._id)
+        const {
+            qty_w,
+            items_w,
+            price_w
+        } = req.body
+
+        const postWants = new Wants ({
+            qty : qty_w,
+            items : items_w,
+            price : price_w, 
+            user : user._id })
+          
+        if(postWants) {
+            await postWants.save()
+        }
+       
+        res.redirect('/prioritas/wishlist')
+    }
+    catch(err) {
+        if(!err.statusCode) {
+          return res.status(500)
+          .json({message : err})
+        }
+    }
+}
+
+
+
+exports.deleteWishlist = async (req, res, next) => {
+    try {
+        const needID = req.params.needId;
+        const wants = await Wants.find({user : req.session.user._id})
+        const user = await User.findById(req.session.user._id)
+        const userData = user.dashboard.map(u => {
+            return u.dashboardData
+        })
+        const totalHarga = wants.reduce((total, wants) => total + wants.price, 0)
+
+        if (!wants) {
+           return next(new Error('Tidak Ada Wishlist!'))
+        }
+        await wants.findByIdAndDelete(needID)
+        wants.pop(wants.user)
+        res.status(201)
+        .render('./menu/Wishlist', 
+        {
+            path : '/prioritas',
+            pageTitle : 'Prioritas Saya',
+            currentUser : user.username,
+            user,
+            wants,
+            userData,
+            totalHarga
+        })
+         console.log(`#${prio} Terhapus!`)
         
         return res.redirect('/prioritas');
     } catch (err) {

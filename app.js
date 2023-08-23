@@ -6,6 +6,7 @@ const User = require("./models/user")
 const session = require('express-session')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const methodOverride = require('method-override')
+const { OpenAIApi } = require('openai');
 
 
 
@@ -23,6 +24,7 @@ const userSession = new MongoDBSession ({
 const mainPageRoutes = require('./routes/main')
 const menuRoutes = require('./routes/menu')
 const priorityRoutes = require('./routes/priority')
+const gptRoutes = require('./routes/gpt')
 const { error404, error500 } = require('./controller/error')
 
 app.use(express.urlencoded({ extended: false }));
@@ -57,7 +59,7 @@ app.use((req,res,next) => {
 app.use(mainPageRoutes)
 app.use(menuRoutes)
 app.use(priorityRoutes)
-
+app.use(gptRoutes)
 
 
 
@@ -72,7 +74,7 @@ app.use( (error,req,res,next) => {
     }
     return res.status(status)
     .json({
-        message
+        message : message
     })
   
 })

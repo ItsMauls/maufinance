@@ -1,9 +1,10 @@
 const express = require('express')
-const { getDashboard, getManage, postBalance } = require('../controller/menu')
+const { getDashboard, postBalance, updateBalance } = require('../controller/menu')
+const validation = require('../middleware/validation')
 const router = express.Router()
 
 router.get('/dashboard', getDashboard)
-router.get('/manage', getManage)
-router.post('/manage/:updateBalance', postBalance)
+router.post('/dashboard', validation.balance, postBalance)
+router.put('/dashboard/:dashID', updateBalance)
 
 module.exports = router

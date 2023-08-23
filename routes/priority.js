@@ -1,10 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const { getPriority, postPriority, postWants, deletePriority } = require('../controller/prioritas')
+const { getPriority, postPriority, deletePriority, postWishlist, getWishlist } = require('../controller/prioritas')
+const validation = require('../middleware/validation')
 
 router.get('/prioritas', getPriority)
 router.post('/prioritas', postPriority)
-router.post('/prioritas/wants', postWants)
-router.delete('/prioritas/:prioId', deletePriority)
+router.delete('/prioritas/:needId', deletePriority)
+
+router.get('/prioritas/wishlist', getWishlist)
+router.post('/prioritas/wishlist', validation.balance , postWishlist)
+
 
 module.exports = router

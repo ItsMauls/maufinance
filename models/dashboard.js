@@ -3,10 +3,12 @@ const Schema = mongoose.Schema
 const User = require("../models/user")
 
 const dashboardSchema = new Schema({
-  currentBalance : Number,
+  currentBalance : {
+    type : Number,
+    required : true
+  },
   expense : Number,
   debt : Number,
-  date : Date,
   user : {
     type : Schema.Types.ObjectId,
     ref : 'User'

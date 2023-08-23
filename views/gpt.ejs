@@ -1,0 +1,41 @@
+<%- include('./includes/header.ejs') %>
+<%- include('./includes/navbar.ejs') %>
+
+<div class="text-blue-400 px-2 font-QuickSand flex items-center">
+    <div class="md:grid grid grid-cols-2 md:grid-cols-2 md:max-w-2xl md:mx-auto md:mt-14 md:gap-x-20">
+       <div class=" bg-red-50 rounded-full border-2 md:mt-0 mt-6 border-red-300">
+        <img class="" src="/image/firda.png" alt=""> 
+       </div>
+       <div class="md:border-2 md:border-black rounded-lg text-center max-w-screen-2xl max-h-[200px] md:pb-0 md:mt-4">
+        <h1 class="mt-14">Halo Perkenalkan Nama Saya Bidul, Saya Disini Akan Memberimu Konsultasi Keuangan yang Ajib!</h1>
+       </div>
+    </div>
+</div>
+
+
+
+<div class="overflow-auto h-auto w-5/6 mx-auto bg-gray-300 m-2 mt-6">
+    <ul class="overflow-y-auto h-34">
+        <li class="grid grid-cols-7 mx-auto my-2 pl-2">
+            <img src="/image/firda.png" class="w-20 rounded-full bg-yellow-50 border border-orange-500" alt="">
+            <h2 class="mt-4 col-span-6" id="intro">Halo, nama saya adalah Bidul, asisten AI yang siap membantu Anda dengan pertanyaan, saran, atau informasi keuangan.
+                 Jangan ragu untuk bertanya kepada saya atau memberi tahu saya cara saya dapat membantu Anda hari ini!</h2>
+        </li>
+        <% if(assistant.length > 0) { %>
+        <li class="grid grid-cols-7 mx-auto my-2 pl-2">
+            <img src="/image/firda.png" class="w-20 rounded-full bg-yellow-50 border border-orange-500" alt="">
+            <h2 class="mt-4 col-span-6" id="typing-effect"><%= assistant %></h2>
+        </li>
+        <% } %>
+     
+          
+    </ul>
+    <div class="flex mx-auto justify-center items-center py-2">
+        <form action="/konsultasi" method="post" class="w-5/6 flex">
+            <input class="w-full" type="text" name="ask">
+            <button class="ml-2 border-gray-400 hover:border-gray-600 border font-QuickSand font-semibold hover:text-white active:scale-95 px-4 rounded-lg" type="submit">Kirim</button>
+        </form>
+    </div>
+    
+</div>
+<%- include('./includes/footer.ejs') %>
