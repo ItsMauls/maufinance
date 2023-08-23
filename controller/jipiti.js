@@ -8,6 +8,7 @@ require('dotenv').config()
 
 
 exports.chatWithGPT = async (req, res, next) => {
+    try {
     if (req.session.user) {
         const user = await User.findById(req.session.user._id);
         res
@@ -23,9 +24,13 @@ exports.chatWithGPT = async (req, res, next) => {
     if(!req.session.user) {
         res.redirect('/')
     }
+}
+catch(err) {
+next(err)
+}
 };  
 
-exports.postGpt = async(req,res) => {
+exports.postGpt = async(req,res,next) => {
     try {
     const ask = req.body.ask
     const user = await User.findById(req.session.user._id);
@@ -47,6 +52,6 @@ exports.postGpt = async(req,res) => {
     });
     }
     catch(err) {
-        console.log(err)
+        next(err)
     }
 }
