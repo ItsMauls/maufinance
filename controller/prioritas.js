@@ -115,7 +115,7 @@ exports.getWishlist = async (req,res) => {
         const userDashboard = user.dashboard[0]
         const totalHarga = wants.reduce((total, wants) => total + wants.price, 0)
         if(req.session.user) {
-        res.render('./menu/Wishlist', {
+        res.render('./menu/wishlist', {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya',
             currentUser : user.username,
@@ -128,7 +128,7 @@ exports.getWishlist = async (req,res) => {
             res.redirect('/')
         }
         }
-        res.render('./menu/Wishlist', {
+        res.render('./menu/wishlist', {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya'
         })
@@ -188,7 +188,7 @@ exports.deleteWishlist = async (req, res, next) => {
         const updatedW = wants.filter(want => want._id.toString() !== wantID)
         
         res.status(201)
-        .render('./menu/Wishlist', 
+        .render('./menu/wishlist', 
         {
             path : '/prioritas',
             pageTitle : 'Prioritas Saya',
